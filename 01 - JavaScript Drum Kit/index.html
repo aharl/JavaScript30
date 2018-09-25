@@ -64,18 +64,15 @@
       const keyCode = ev.which;
       const keyEl = document.querySelector(`.key[data-key="${keyCode}"]`);
       const audio = document.querySelector(`audio[data-key="${keyCode}"]`);
-      if (keyEl !== null && audio !== null) {
-        keyEl.classList.remove('playing');
-        audio.pause();
-        audio.currentTime = 0;
+      if (!audio) return;
+      audio.currentTime = 0;
 
-        keyEl.classList.add('playing');
-        audio.addEventListener('ended', () => {
-          audio.currentTime = 0;
-          keyEl.classList.remove('playing');
-        })
-        audio.play();
-      }
+      keyEl.classList.add('playing');
+      audio.addEventListener('ended', () => {
+        audio.currentTime = 0;
+        keyEl.classList.remove('playing');
+      })
+      audio.play();
     });
   </script>
 
